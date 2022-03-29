@@ -1,0 +1,57 @@
+class Solution {
+public:
+    // Brute force approach O(n log n) Sorting
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<pair<int,int>> ans;
+        for(int i=0;i<nums.size();i++) ans.push_back({nums[i],i});
+        sort(ans.begin(),ans.end());
+        vector<int> res;
+        int n = nums.size();
+        int low = 0, high = n-1;
+        
+        while(low < high){
+            if( ans[low].first + ans[high].first == target){
+            res.push_back(ans[low].second);
+            res.push_back(ans[high].second);
+            return res;
+            }
+             else if( ans[low].first + ans[high].first < target) low++;
+            else if(ans[low].first + ans[high].first > target) high--;
+              
+            
+        }
+        return res;
+        
+     }
+};
+
+// Approach 2: Hashmap O(N)
+// vector<int> twoSum(vector<int>& nums, int target) {
+//     unordered_map<int, int> imap;
+    
+//     for (int i = 0;; ++i) {
+//         auto it = imap.find(target - nums[i]);
+        
+//         if (it != imap.end()) 
+//             return vector<int> {i, it->second};
+            
+//         imap[nums[i]] = i;
+//     }
+// }
+
+// or
+// 1. Brute Force Approach  O(N^2)
+
+// vector<int> twoSum(vector<int>& nums, int target) {
+//         vector<int>sum;        
+//          for(int i=0;i<nums.size();i++){
+//              for(int j=i+1;j<nums.size();j++){
+//                  if(nums[j]==target-nums[i]){
+//                      sum.push_back(i);
+//                      sum.push_back(j);
+//                  }            
+//              }
+//          }    
+//         return sum;   
+//     }
+// //
